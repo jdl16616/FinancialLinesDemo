@@ -7,8 +7,7 @@ use App\Entity\Trait\Column\Amount as EntityTraitAmount;
 use App\Entity\Trait\Column\CreationDate as EntityTraitCreationDate;
 use App\Entity\Trait\Column\Id as EntityTraitId;
 use App\Entity\Trait\Column\Reference as EntityTraitReference;
-use App\Entity\Trait\ColumnAssociated\Creditor as EntityTraitCreditorId;
-use App\Entity\Trait\ColumnAssociated\Debtor as EntityTraitDebtorId;
+use App\Entity\Trait\ColumnAssociated\Statement as EntityTraitStatement;
 
 // Interface
 use App\Entity\Interface\Export\Csv as EntityInterfaceExportCsv;
@@ -21,14 +20,14 @@ use Doctrine\ORM\Mapping as ORM;
 class CreditNote implements EntityInterfaceExportCsv
 {
     // Columns
-    use EntityTraitId, EntityTraitReference, EntityTraitAmount, EntityTraitCreditorId, EntityTraitDebtorId, EntityTraitCreationDate;
+    use EntityTraitId, EntityTraitReference, EntityTraitAmount, EntityTraitStatement, EntityTraitCreationDate;
 
     /**
      * @return string
      */
     static function csvGetHeadings(): string
     {
-        return 'Reference,Creation date,Amount,Creditor name,Debtor name' . PHP_EOL;
+        return 'Reference,Creation date,Amount,Statement reference,Creditor name,Debtor name' . PHP_EOL;
     }
 
     /**
@@ -38,13 +37,14 @@ class CreditNote implements EntityInterfaceExportCsv
     {
         $formattedCreationDate = $this->getCreationDate()->format('Y-m-d');
 
-        return sprintf(
-            '%s,%s,%s,%s,%s' . PHP_EOL,
-            $this->getReference(),
-            $formattedCreationDate,
-            $this->getAmount(),
-            $this->getCreditor()->getName(),
-            $this->getDebtor()->getName(),
-        );
+        return
+            $this->getReference() . ',' .
+            $formattedCreationDate . ',' .
+            $this->getAmount() . ',' .
+            $this->getStatement()->getReference() . ',' .
+            $this->getStatement()->getCreditor()->getName() . ',' .
+            $this->getStatement()->getDebtor()->getName() .
+            PHP_EOL
+        ;
     }
 }

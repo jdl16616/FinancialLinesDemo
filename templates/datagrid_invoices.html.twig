@@ -39,6 +39,7 @@
                 <th>Creation Date</th>
                 <th>Due Date</th>
                 <th>Amount</th>
+                <th>Statement</th>
                 <th>Creditor</th>
                 <th>Debtor</th>
             </tr>
@@ -51,8 +52,9 @@
                     <td>{{ invoice.creationDate|date('Y-m-d') }}</td>
                     <td>{{ invoice.dueDate|date('Y-m-d') }}</td>
                     <td>{{ invoice.amount }}</td>
-                    <td>{{ invoice.creditor.name }}</td>
-                    <td>{{ invoice.debtor.name }}</td>
+                    <td>{{ invoice.statement.reference }}</td>
+                    <td>{{ invoice.statement.creditor.name }}</td>
+                    <td>{{ invoice.statement.debtor.name }}</td>
                 </tr>
             {% endfor %}
             </tbody>

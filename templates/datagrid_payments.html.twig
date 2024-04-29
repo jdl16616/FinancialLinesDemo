@@ -39,6 +39,7 @@
                 <th>Creation Date</th>
                 <th>Amount</th>
                 <th>IBAN</th>
+                <th>Statement</th>
                 <th>Creditor</th>
                 <th>Debtor</th>
             </tr>
@@ -51,8 +52,9 @@
                     <td>{{ payment.creationDate|date('Y-m-d') }}</td>
                     <td>{{ payment.amount }}</td>
                     <td>{{ payment.iban }}</td>
-                    <td>{{ payment.creditor.name }}</td>
-                    <td>{{ payment.debtor.name }}</td>
+                    <td>{{ payment.statement.reference }}</td>
+                    <td>{{ payment.statement.creditor.name }}</td>
+                    <td>{{ payment.statement.debtor.name }}</td>
                 </tr>
             {% endfor %}
             </tbody>

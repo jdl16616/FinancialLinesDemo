@@ -8,8 +8,7 @@ use App\Entity\Trait\Column\CreationDate as EntityTraitCreationDate;
 use App\Entity\Trait\Column\Iban as EntityTraitIban;
 use App\Entity\Trait\Column\Id as EntityTraitId;
 use App\Entity\Trait\Column\Reference as EntityTraitReference;
-use App\Entity\Trait\ColumnAssociated\Creditor as EntityTraitCreditorId;
-use App\Entity\Trait\ColumnAssociated\Debtor as EntityTraitDebtorId;
+use App\Entity\Trait\ColumnAssociated\Statement as EntityTraitStatement;
 
 // Interface
 use App\Entity\Interface\Export\Csv as EntityInterfaceExportCsv;
@@ -22,14 +21,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Payment implements EntityInterfaceExportCsv
 {
     // Columns
-    use EntityTraitId, EntityTraitReference, EntityTraitCreationDate, EntityTraitAmount, EntityTraitCreditorId, EntityTraitDebtorId, EntityTraitIban;
+    use EntityTraitId, EntityTraitReference, EntityTraitCreationDate, EntityTraitAmount, EntityTraitStatement, EntityTraitIban;
 
     /**
      * @return string
      */
     static function csvGetHeadings(): string
     {
-        return 'Reference,Creation date,Amount,Creditor name,Debtor name,IBAN' . PHP_EOL;
+        return 'Reference,Creation date,Amount,Statement reference, Creditor name,Debtor name,IBAN' . PHP_EOL;
     }
 
     /**
@@ -39,15 +38,16 @@ class Payment implements EntityInterfaceExportCsv
     {
         $formattedCreationDate = $this->getCreationDate()->format('Y-m-d');
 
-        return sprintf(
-            '%s,%s,%s,%s,%s,%s' . PHP_EOL,
-            $this->getReference(),
-            $formattedCreationDate,
-            $this->getAmount(),
-            $this->getCreditor()->getName(),
-            $this->getDebtor()->getName(),
-            $this->getIban()
-        );
+        return
+            $this->getReference() . ',' .
+            $formattedCreationDate . ',' .
+            $this->getAmount() . ',' .
+            $this->getStatement()->getReference() . ',' .
+            $this->getStatement()->getCreditor()->getName() . ',' .
+            $this->getStatement()->getDebtor()->getName() . ',' .
+            $this->getIban() .
+            PHP_EOL
+        ;
     }
 
 }

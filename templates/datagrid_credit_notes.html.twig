@@ -37,6 +37,7 @@
             <th>Reference</th>
             <th>Creation Date</th>
             <th>Amount</th>
+            <th>Statement</th>
             <th>Creditor</th>
             <th>Debtor</th>
         </tr>
@@ -48,8 +49,9 @@
                 <td>{{ creditnote.reference }}</td>
                 <td>{{ creditnote.creationDate|date('Y-m-d') }}</td>
                 <td>{{ creditnote.amount }}</td>
-                <td>{{ creditnote.creditor.name }}</td>
-                <td>{{ creditnote.debtor.name }}</td>
+                <td>{{ creditnote.statement.reference }}</td>
+                <td>{{ creditnote.statement.creditor.name }}</td>
+                <td>{{ creditnote.statement.debtor.name }}</td>
             </tr>
         {% endfor %}
         </tbody>
