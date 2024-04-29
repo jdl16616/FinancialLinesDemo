@@ -1,0 +1,64 @@
+{# templates/invoice.html.twig #}
+
+{% extends 'navigation.html.twig' %}
+
+{% block body %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Invoice List</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+
+    <div class="container">
+        <h1>Invoice List</h1>
+
+        {# Filter Form #}
+        <form action="{{ path('datagird_invoices_filter_apply') }}" method="get">
+            <div class="form-group">
+                <label for="fromDate">Creation date from:</label>
+                <input type="date" class="form-control" id="filter_invoice_creationDateFrom" name="filter_invoice_creationDateFrom" {% if app.session.get('filter_invoice_creationDateFrom') %} value="{{ app.session.get('filter_invoice_creationDateFrom') }}" {% endif %}>
+            </div>
+            <div class="form-group">
+                <label for="toDate">Creation date to:</label>
+                <input type="date" class="form-control" id="filter_invoice_creationDateTo" name="filter_invoice_creationDateTo" {% if app.session.get('filter_invoice_creationDateTo') %} value="{{ app.session.get('filter_invoice_creationDateTo') }}" {% endif %}>
+            </div>
+            <button type="submit" class="btn btn-primary">Apply Filter</button>
+            <a href="{{ path('datagird_invoices_filter_clear') }}" class="btn btn-primary">Clear Filters</a>
+            <a href="{{ path('datagird_invoices_export_csv') }}" class="btn btn-secondary">Export to CSV</a>
+        </form>
+
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Reference</th>
+                <th>Creation Date</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <th>Creditor</th>
+                <th>Debtor</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for invoice in invoices %}
+                <tr>
+                    <td>{{ invoice.id }}</td>
+                    <td>{{ invoice.reference }}</td>
+                    <td>{{ invoice.creationDate|date('Y-m-d') }}</td>
+                    <td>{{ invoice.dueDate|date('Y-m-d') }}</td>
+                    <td>{{ invoice.amount }}</td>
+                    <td>{{ invoice.creditor.name }}</td>
+                    <td>{{ invoice.debtor.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    </body>
+    </html>
+{% endblock %}

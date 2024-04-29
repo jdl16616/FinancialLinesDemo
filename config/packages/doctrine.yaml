@@ -1,13 +1,13 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
-
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '16'
-
-        profiling_collect_backtrace: '%kernel.debug%'
-        use_savepoints: true
+        # Configure your database connection
+        driver: 'pdo_mysql'  # Specify the database driver
+        host: '127.0.0.1'    # Host where your MariaDB is running (localhost)
+        port: '3306'         # Port on which MariaDB is running (default port)
+        dbname: 'CollectOnline'  # Name of your database
+        user: 'root'     # Database username
+        password: '2530'  # Database password
+        charset: utf8mb4      # Adjust charset if needed
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true

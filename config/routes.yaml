@@ -3,3 +3,64 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# Routes: Company
+datagrid_companies:
+    path: /
+    controller: App\Controller\Company::index
+
+
+# Routes: Credit Note
+datagrid_credit_note_load:
+    path: /datagrid-credit-note-load
+    controller: App\Controller\CreditNote::creditNoteGridOnLoad
+
+datagird_credit_note_filter_apply:
+    path: /datagird-credit-note-filter-apply
+    controller: App\Controller\CreditNote::creditNoteGridOnFilterApply
+    methods: GET
+
+datagird_credit_note_filter_clear:
+    path: /datagird-credit-note-filter-clear
+    controller: App\Controller\CreditNote::creditNoteGridOnFilterReset
+
+datagird_credit_note_export_csv:
+    path: /datagird-credit-note-export-csv
+    controller: App\Controller\CreditNote::exportToCsv
+
+
+# Routes: Invoice
+datagrid_invoices_load:
+    path: /datagrid-invoices-load
+    controller: App\Controller\Invoice::invoiceGridOnLoad
+
+datagird_invoices_filter_apply:
+    path: /datagird-invoices-filter-apply
+    controller: App\Controller\Invoice::invoiceGridOnFilterApply
+    methods: GET
+
+datagird_invoices_filter_clear:
+    path: /datagird-invoices-filter-clear
+    controller: App\Controller\Invoice::invoiceGridOnFilterReset
+
+datagird_invoices_export_csv:
+    path: /datagird-invoices-export-csv
+    controller: App\Controller\Invoice::exportToCsv
+
+# Routes: Payment
+datagrid_payments_load:
+    path: /datagrid-payments-load
+    controller: App\Controller\Payment::paymentGridOnLoad
+
+datagird_payments_filter_apply:
+    path: /datagird-payments-filter-apply
+    controller: App\Controller\Payment::paymentGridOnFilterApply
+    methods: GET
+
+datagird_payments_filter_clear:
+    path: /datagird-payments-filter-clear
+    controller: App\Controller\Payment::paymentGridOnFilterReset
+
+datagird_payments_export_csv:
+    path: /datagird-payments-export-csv
+    controller: App\Controller\Payment::exportToCsv

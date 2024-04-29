@@ -1,0 +1,64 @@
+{# templates/invoice.html.twig #}
+
+{% extends 'navigation.html.twig' %}
+
+{% block body %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Payment List</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+
+    <div class="container">
+        <h1>Payment List</h1>
+
+        {# Filter Form #}
+        <form action="{{ path('datagird_payments_filter_apply') }}" method="get">
+            <div class="form-group">
+                <label for="fromDate">Creation date from:</label>
+                <input type="date" class="form-control" id="filter_payment_creationDateFrom" name="filter_payment_creationDateFrom" {% if app.session.get('filter_payment_creationDateFrom') %} value="{{ app.session.get('filter_payment_creationDateFrom') }}" {% endif %}>
+            </div>
+            <div class="form-group">
+                <label for="toDate">Creation date to:</label>
+                <input type="date" class="form-control" id="filter_payment_creationDateTo" name="filter_payment_creationDateTo" {% if app.session.get('filter_payment_creationDateTo') %} value="{{ app.session.get('filter_payment_creationDateTo') }}" {% endif %}>
+            </div>
+            <button type="submit" class="btn btn-primary">Apply Filter</button>
+            <a href="{{ path('datagird_payments_filter_clear') }}" class="btn btn-primary">Clear Filters</a>
+            <a href="{{ path('datagird_payments_export_csv') }}" class="btn btn-secondary">Export to CSV</a>
+        </form>
+
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Reference</th>
+                <th>Creation Date</th>
+                <th>Amount</th>
+                <th>IBAN</th>
+                <th>Creditor</th>
+                <th>Debtor</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.id }}</td>
+                    <td>{{ payment.reference }}</td>
+                    <td>{{ payment.creationDate|date('Y-m-d') }}</td>
+                    <td>{{ payment.amount }}</td>
+                    <td>{{ payment.iban }}</td>
+                    <td>{{ payment.creditor.name }}</td>
+                    <td>{{ payment.debtor.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    </body>
+    </html>
+{% endblock %}

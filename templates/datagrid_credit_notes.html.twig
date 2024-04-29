@@ -1,0 +1,61 @@
+{# templates/creditNote.html.twig #}
+{% extends 'navigation.html.twig' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Note List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Credit Note List</h1>
+
+    {# Filter Form #}
+    <form action="{{ path('datagird_credit_note_filter_apply') }}" method="get">
+        <div class="form-group">
+            <label for="creationDateFrom">Creation date from:</label>
+            <input type="date" class="form-control" id="filter_creditNote_creationDateFrom" name="filter_creditNote_creationDateFrom" {% if app.session.get('filter_creditNote_creationDateFrom') %} value="{{ app.session.get('filter_creditNote_creationDateFrom') }}" {% endif %}>
+        </div>
+        <div class="form-group">
+            <label for="creationDateTo">Creation date to:</label>
+            <input type="date" class="form-control" id="filter_creditNote_creationDateTo" name="filter_creditNote_creationDateTo" {% if app.session.get('filter_creditNote_creationDateTo') %} value="{{ app.session.get('filter_creditNote_creationDateTo') }}" {% endif %}>
+        </div>
+        <button type="submit" class="btn btn-primary">Apply Filter</button>
+        <a href="{{ path('datagird_credit_note_filter_clear') }}" class="btn btn-primary">Clear Filters</a>
+        <a href="{{ path('datagird_credit_note_export_csv') }}" class="btn btn-secondary">Export to CSV</a>
+    </form>
+
+    <br>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Reference</th>
+            <th>Creation Date</th>
+            <th>Amount</th>
+            <th>Creditor</th>
+            <th>Debtor</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for creditnote in creditNotes %}
+            <tr>
+                <td>{{ creditnote.id }}</td>
+                <td>{{ creditnote.reference }}</td>
+                <td>{{ creditnote.creationDate|date('Y-m-d') }}</td>
+                <td>{{ creditnote.amount }}</td>
+                <td>{{ creditnote.creditor.name }}</td>
+                <td>{{ creditnote.debtor.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+{% endblock %}
