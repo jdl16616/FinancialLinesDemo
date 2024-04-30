@@ -3,6 +3,7 @@
 namespace App\Entity\Trait\Column;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 trait DueDate
 {

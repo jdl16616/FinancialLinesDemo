@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class Company  extends AbstractController
+class Company extends AbstractController
 {
     /**
      * @var EntityManagerInterface

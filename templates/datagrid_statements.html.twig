@@ -1,0 +1,112 @@
+{# templates/invoice.html.twig #}
+
+{% extends 'navigation.html.twig' %}
+
+{% block body %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Statement List</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+
+    <div class="container">
+        <h1>Statement List</h1>
+
+        {# Filter Form #}
+        <form action="{{ path('datagird_statements_filter_apply') }}" method="get" class="d-flex flex-column">
+            <div class="d-flex">
+                <div class="flex-grow-1 form-group mr-2">
+                    {% set fieldName = 'filter_statement_creationDate_from' %}
+                    <label for="fromDate">Statement creation date from:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+                <div class="flex-grow-1 form-group">
+                    {% set fieldName = 'filter_statement_creationDate_to' %}
+                    <label for="toDate">Statement creation date to:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="flex-grow-1 form-group mr-2">
+                    {% set fieldName = 'filter_statement_invoice_creationDate_from' %}
+                    <label for="fromDate">Invoice creation date from:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+                <div class="flex-grow-1 form-group">
+                    {% set fieldName = 'filter_statement_invoice_creationDate_to' %}
+                    <label for="toDate">Invoice creation date to:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="flex-grow-1 form-group mr-2">
+                    {% set fieldName = 'filter_statement_creditNote_creationDate_from' %}
+                    <label for="fromDate">Credit note creation date from:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+                <div class="flex-grow-1 form-group">
+                    {% set fieldName = 'filter_statement_creditNote_creationDate_to' %}
+                    <label for="toDate">Credit note creation date to:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="flex-grow-1 form-group mr-2">
+                    {% set fieldName = 'filter_statement_payment_creationDate_from' %}
+                    <label for="fromDate">Payment creation date from:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+                <div class="flex-grow-1 form-group">
+                    {% set fieldName = 'filter_statement_payment_creationDate_to' %}
+                    <label for="toDate">Payment creation date to:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+            </div>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary mr-2">Apply Filter</button>
+                <a href="{{ path('datagird_statements_filter_clear') }}" class="btn btn-primary mr-2">Clear Filters</a>
+                <a href="{{ path('datagird_statements_export_csv') }}" class="btn btn-secondary">Export to CSV</a>
+            </div>
+        </form>
+
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Reference</th>
+                <th>Creation Date</th>
+                <th>Creditor</th>
+                <th>Debtor</th>
+                <th>Invoice references</th>
+                <th>Credit note references</th>
+                <th>Payment references</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for statement in statements %}
+                <tr>
+                    <td>{{ statement.reference }}</td>
+                    <td>{{ statement.creationDate|date('Y-m-d') }}</td>
+                    <td>{{ statement.creditor.name }}</td>
+                    <td>{{ statement.debtor.name }}</td>
+                    <td>
+                        {% for invoice in statement.invoices %} {{ invoice.reference }} <br> {% endfor %}
+                    </td>
+                    <td>
+                        {% for creditNote in statement.creditNotes %} {{ creditNote.reference }} <br> {% endfor %}
+                    </td>
+                    <td>
+                        {% for payment in statement.payments %} {{ payment.reference }} <br> {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    </body>
+    </html>
+{% endblock %}

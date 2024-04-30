@@ -4,6 +4,25 @@ controllers:
         namespace: App\Controller
     type: attribute
 
+# Routes: Statement
+datagrid_statements_load:
+    path: /datagrid-statements-load
+    controller: App\Controller\Statement::statementGridOnLoad
+
+datagird_statements_filter_apply:
+    path: /datagird-statement-filter-apply
+    controller: App\Controller\Statement::statementGridOnFilterApply
+    methods: GET
+
+datagird_statements_filter_clear:
+    path: /datagird-statements-filter-clear
+    controller: App\Controller\Statement::creditNoteGridOnFilterReset
+
+datagird_statements_export_csv:
+    path: /datagird-statements-export-csv
+    controller: App\Controller\Export\Statement::exportToCsv
+
+
 # Routes: Company
 datagrid_companies:
     path: /
@@ -26,7 +45,7 @@ datagird_credit_note_filter_clear:
 
 datagird_credit_note_export_csv:
     path: /datagird-credit-note-export-csv
-    controller: App\Controller\CreditNote::exportToCsv
+    controller: App\Controller\Export\CreditNote::exportToCsv
 
 
 # Routes: Invoice
@@ -45,7 +64,7 @@ datagird_invoices_filter_clear:
 
 datagird_invoices_export_csv:
     path: /datagird-invoices-export-csv
-    controller: App\Controller\Invoice::exportToCsv
+    controller: App\Controller\Export\Invoice::exportToCsv
 
 # Routes: Payment
 datagrid_payments_load:
@@ -63,4 +82,4 @@ datagird_payments_filter_clear:
 
 datagird_payments_export_csv:
     path: /datagird-payments-export-csv
-    controller: App\Controller\Payment::exportToCsv
+    controller: App\Controller\Export\Payment::exportToCsv

@@ -15,26 +15,32 @@
         <h1>Payment List</h1>
 
         {# Filter Form #}
-        <form action="{{ path('datagird_payments_filter_apply') }}" method="get">
-            <div class="form-group">
-                <label for="fromDate">Creation date from:</label>
-                <input type="date" class="form-control" id="filter_payment_creationDateFrom" name="filter_payment_creationDateFrom" {% if app.session.get('filter_payment_creationDateFrom') %} value="{{ app.session.get('filter_payment_creationDateFrom') }}" {% endif %}>
+        <form action="{{ path('datagird_payments_filter_apply') }}" method="get" class="d-flex flex-column">
+            <div class="d-flex">
+                <div class="flex-grow-1 form-group mr-2">
+                    {% set fieldName = 'filter_payment_creationDate_from' %}
+                    <label for="fromDate">Creation date from:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
+                <div class="flex-grow-1 form-group">
+                    {% set fieldName = 'filter_payment_creationDate_to' %}
+                    <label for="toDate">Creation date to:</label>
+                    <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="toDate">Creation date to:</label>
-                <input type="date" class="form-control" id="filter_payment_creationDateTo" name="filter_payment_creationDateTo" {% if app.session.get('filter_payment_creationDateTo') %} value="{{ app.session.get('filter_payment_creationDateTo') }}" {% endif %}>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary mr-2">Apply Filter</button>
+                <a href="{{ path('datagird_payments_filter_clear') }}" class="btn btn-primary mr-2">Clear Filters</a>
+                <a href="{{ path('datagird_payments_export_csv') }}" class="btn btn-secondary">Export to CSV</a>
             </div>
-            <button type="submit" class="btn btn-primary">Apply Filter</button>
-            <a href="{{ path('datagird_payments_filter_clear') }}" class="btn btn-primary">Clear Filters</a>
-            <a href="{{ path('datagird_payments_export_csv') }}" class="btn btn-secondary">Export to CSV</a>
         </form>
+
 
         <br>
 
         <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Reference</th>
                 <th>Creation Date</th>
                 <th>Amount</th>
@@ -47,7 +53,6 @@
             <tbody>
             {% for payment in payments %}
                 <tr>
-                    <td>{{ payment.id }}</td>
                     <td>{{ payment.reference }}</td>
                     <td>{{ payment.creationDate|date('Y-m-d') }}</td>
                     <td>{{ payment.amount }}</td>

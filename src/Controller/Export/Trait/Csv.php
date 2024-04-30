@@ -1,17 +1,34 @@
 <?php
 
-namespace App\Controller\Exporter;
+namespace App\Controller\Export\Trait;
 
-// Vendor
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-Class Csv
+trait Csv
 {
+    private function csvGetData(Request $request)
+    {
+        $exportHeaders = $this->prepareHeaders();
+        $csvData = implode(',', $exportHeaders) . PHP_EOL;
+
+        // Data
+        $dataArray = $this->fetchData($request);
+        if (!empty($dataArray)) {
+            $exportData = $this->prepareData($dataArray);
+            foreach ($exportData as $entityData) {
+                $csvData .= implode(',', $entityData) . PHP_EOL;
+            }
+        }
+
+        return $csvData;
+    }
+
     /**
      * @param $fileName
      * @return string
      */
-    public function buildFileName($fileName):string
+    private function csvGetFileName($fileName):string
     {
         return $fileName . '-' . date('Y-m-d-H-i-s') . '.csv';
     }
@@ -21,7 +38,7 @@ Class Csv
      * @param $fileName
      * @return StreamedResponse
      */
-    public function createExport($csvData, $fileName):StreamedResponse
+    private function csvCreateStreamedResponse($csvData, $fileName):StreamedResponse
     {
         // Create a StreamedResponse to output the CSV data
         $response = new StreamedResponse();

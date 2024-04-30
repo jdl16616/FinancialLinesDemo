@@ -40,14 +40,11 @@ class Fetch extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder(self::ALIAS_CREDITNOTE);
 
-        if ($filter->getCreationDateFrom()) {
-            $queryBuilder->andWhere(self::ALIAS_CREDITNOTE . '.creationDate >= :creationDateFrom')
-                ->setParameter('creationDateFrom', $filter->getCreationDateFrom());
-        }
-        if ($filter->getCreationDateTo()) {
-            $queryBuilder->andWhere(self::ALIAS_CREDITNOTE . '.creationDate <= :creationDateTo')
-                ->setParameter('creationDateTo', $filter->getCreationDateTo());
-        }
+        if ($filter->getCreationDateFrom())
+            $queryBuilder->andWhere(self::ALIAS_CREDITNOTE . '.creationDate >= :creationDateFrom')->setParameter('creationDateFrom', $filter->getCreationDateFrom());
+        if ($filter->getCreationDateTo())
+            $queryBuilder->andWhere(self::ALIAS_CREDITNOTE . '.creationDate <= :creationDateTo')->setParameter('creationDateTo', $filter->getCreationDateTo());
+
 
         return $queryBuilder->getQuery()->getResult();
     }

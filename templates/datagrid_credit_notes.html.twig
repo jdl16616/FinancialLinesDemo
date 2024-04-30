@@ -14,18 +14,24 @@
     <h1>Credit Note List</h1>
 
     {# Filter Form #}
-    <form action="{{ path('datagird_credit_note_filter_apply') }}" method="get">
-        <div class="form-group">
-            <label for="creationDateFrom">Creation date from:</label>
-            <input type="date" class="form-control" id="filter_creditNote_creationDateFrom" name="filter_creditNote_creationDateFrom" {% if app.session.get('filter_creditNote_creationDateFrom') %} value="{{ app.session.get('filter_creditNote_creationDateFrom') }}" {% endif %}>
+    <form action="{{ path('datagird_credit_note_filter_apply') }}" method="get" class="d-flex flex-column">
+        <div class="d-flex">
+            <div class="flex-grow-1 form-group mr-2">
+                {% set fieldName = 'filter_creditNote_creationDate_from' %}
+                <label for="fromDate">Creation date from:</label>
+                <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+            </div>
+            <div class="flex-grow-1 form-group">
+                {% set fieldName = 'filter_creditNote_creationDate_to' %}
+                <label for="toDate">Creation date to:</label>
+                <input type="date" class="form-control" id="{{ fieldName }}" name="{{ fieldName }}" {% if app.session.get(fieldName) %} value="{{ app.session.get(fieldName) }}" {% endif %}>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="creationDateTo">Creation date to:</label>
-            <input type="date" class="form-control" id="filter_creditNote_creationDateTo" name="filter_creditNote_creationDateTo" {% if app.session.get('filter_creditNote_creationDateTo') %} value="{{ app.session.get('filter_creditNote_creationDateTo') }}" {% endif %}>
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary mr-2">Apply Filter</button>
+            <a href="{{ path('datagird_credit_note_filter_clear') }}" class="btn btn-primary mr-2">Clear Filters</a>
+            <a href="{{ path('datagird_credit_note_export_csv') }}" class="btn btn-secondary">Export to CSV</a>
         </div>
-        <button type="submit" class="btn btn-primary">Apply Filter</button>
-        <a href="{{ path('datagird_credit_note_filter_clear') }}" class="btn btn-primary">Clear Filters</a>
-        <a href="{{ path('datagird_credit_note_export_csv') }}" class="btn btn-secondary">Export to CSV</a>
     </form>
 
     <br>
@@ -33,7 +39,6 @@
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Reference</th>
             <th>Creation Date</th>
             <th>Amount</th>
@@ -45,7 +50,6 @@
         <tbody>
         {% for creditnote in creditNotes %}
             <tr>
-                <td>{{ creditnote.id }}</td>
                 <td>{{ creditnote.reference }}</td>
                 <td>{{ creditnote.creationDate|date('Y-m-d') }}</td>
                 <td>{{ creditnote.amount }}</td>
