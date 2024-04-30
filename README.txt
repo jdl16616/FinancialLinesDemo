@@ -9,3 +9,6 @@ Setup the database connectionin /config/packages/doctrine.yaml
 # Webclient
 Apache2 was used, by placing this whole project /CollectOnline, inside /apache2/htdocs/Projects
 http://localhost/Projects/CollectOnline/public/index.php
+
+# Demo
+/Demo contains screenshots from the webpages and some exports
