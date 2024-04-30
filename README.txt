@@ -1,4 +1,5 @@
-This project was tested on windows, using mariaDb for database management, php 8+, apache2 to rune the webclient
+This project was tested on windows, using mariaDb for database management, php 8+, apache2 to rune the webclient.
+I had no prior experience in symfony (doctrine, twig, bootstrap), it took some getting used to since the difference in architecture and syntax compared to Zend or Laminas framework.
 
 # Database
 Import the file inside /database_dump to your local database tool.
