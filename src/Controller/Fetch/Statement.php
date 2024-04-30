@@ -13,17 +13,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class Statement
 {
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-    /**
      * @var RepositoryStatementFetch
      */
     private $repositoryStatementFetch;
 
-    public function __construct(EntityManagerInterface $entityManager, RepositoryStatementFetch $repositoryStatementFetch)
+    public function __construct(RepositoryStatementFetch $repositoryStatementFetch)
     {
-        $this->entityManager = $entityManager;
         $this->repositoryStatementFetch = $repositoryStatementFetch;
     }
 

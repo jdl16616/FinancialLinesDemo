@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Entity\Company as EntityCompany;
 
 // Repository
-use App\Repository\Company\Fetch as RepositoryCompanyFetch;
 
 // Vendor
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,15 +19,10 @@ class Company extends AbstractController
      * @var EntityManagerInterface
      */
     private $entityManager;
-    /**
-     * @var RepositoryCompanyFetch
-     */
-    private $RepositoryCompanyFetch;
 
-    public function __construct(EntityManagerInterface $entityManager, RepositoryCompanyFetch $userRepository)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->RepositoryCompanyFetch = $userRepository;
     }
 
     #[Route("/", name: "company_list")]

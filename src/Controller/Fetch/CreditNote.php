@@ -13,17 +13,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class CreditNote
 {
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-    /**
      * @var RepositoryCreditNoteFetch
      */
     private $repositoryCreditNoteFetch;
 
-    public function __construct(EntityManagerInterface $entityManager, RepositoryCreditNoteFetch $repositoryCreditNoteFetch)
+    public function __construct(RepositoryCreditNoteFetch $repositoryCreditNoteFetch)
     {
-        $this->entityManager = $entityManager;
         $this->repositoryCreditNoteFetch = $repositoryCreditNoteFetch;
     }
 

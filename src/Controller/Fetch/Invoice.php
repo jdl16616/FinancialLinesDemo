@@ -13,18 +13,13 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class Invoice
 {
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-    /**
      * @var RepositoryInvoiceFetch
      */
     private $repositoryInvoiceFetch;
 
 
-    public function __construct(EntityManagerInterface $entityManager, RepositoryInvoiceFetch $repositoryInvoiceFetch)
+    public function __construct(RepositoryInvoiceFetch $repositoryInvoiceFetch)
     {
-        $this->entityManager = $entityManager;
         $this->repositoryInvoiceFetch = $repositoryInvoiceFetch;
     }
 
