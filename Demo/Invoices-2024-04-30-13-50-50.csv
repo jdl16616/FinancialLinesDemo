@@ -1,0 +1,6 @@
+Invoice reference,Invoice creation date,Invoice due date,Invoice amount,Statement reference,Creditor name,Debtor name
+INVOICE-00056,2024-05-26,2024-06-29,1043.68,Statement-00014,Facebook Inc.,Verizon Communications Inc.
+INVOICE-00057,2024-05-27,2024-09-04,58934.46,Statement-00015,Facebook Inc.,Cisco Systems, Inc.
+INVOICE-00058,2024-05-28,2024-06-19,51689.47,Statement-00016,Apple Inc.,Apple Inc.
+INVOICE-00059,2024-05-29,2024-07-31,93237.22,Statement-00017,Microsoft Corporation,Microsoft Corporation
+INVOICE-00060,2024-05-30,2024-08-15,48308.02,Statement-00018,Amazon.com Inc.,Amazon.com Inc.

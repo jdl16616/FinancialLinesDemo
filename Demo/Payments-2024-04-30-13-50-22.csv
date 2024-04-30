@@ -1,0 +1,5 @@
+Payment reference,Payment creation date,Payment amount,Payment IBAN,Statement reference,Creditor name,Debtor name
+PAYMENT-00001,2024-04-01,74893.27,BE1234567890123456,Statement-00005,Microsoft Corporation,Johnson & Johnson
+PAYMENT-00002,2024-04-02,92416.95,BE2345678901234567,Statement-00010,Alphabet Inc.,UnitedHealth Group Inc.
+PAYMENT-00031,2024-04-01,74893.27,BE1234567890123456,Statement-00034,Alphabet Inc.,Verizon Communications Inc.
+PAYMENT-00032,2024-04-02,92416.95,BE2345678901234567,Statement-00040,Facebook Inc.,Facebook Inc.

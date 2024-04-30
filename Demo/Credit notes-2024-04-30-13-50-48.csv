@@ -1,0 +1,11 @@
+Credit note reference,Credit note creation date,Credit note amount,Statement reference,Creditor name,Debtor name
+CREDIT-NOTE-00026,2024-04-26,79241.86,Statement-00007,Amazon.com Inc.,Walmart Inc.
+CREDIT-NOTE-00027,2024-04-27,13542.19,Statement-00008,Amazon.com Inc.,JPMorgan Chase & Co.
+CREDIT-NOTE-00028,2024-04-28,67293.75,Statement-00002,Apple Inc.,Tesla, Inc.
+CREDIT-NOTE-00029,2024-04-29,92836.91,Statement-00004,Microsoft Corporation,Tencent Holdings Limited
+CREDIT-NOTE-00030,2024-04-30,18562.84,Statement-00003,Apple Inc.,Alibaba Group Holding Limited
+CREDIT-NOTE-00056,2024-04-26,42968.15,Statement-00030,Facebook Inc.,UnitedHealth Group Inc.
+CREDIT-NOTE-00057,2024-04-27,17582.36,Statement-00028,Amazon.com Inc.,JPMorgan Chase & Co.
+CREDIT-NOTE-00058,2024-04-28,63391.84,Statement-00022,Microsoft Corporation,Tesla, Inc.
+CREDIT-NOTE-00059,2024-04-29,82846.72,Statement-00026,Apple Inc.,Visa Inc.
+CREDIT-NOTE-00060,2024-04-30,49723.28,Statement-00024,Alphabet Inc.,Tencent Holdings Limited
